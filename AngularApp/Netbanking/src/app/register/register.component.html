@@ -1,0 +1,180 @@
+<h1 class="col-md-offset-4 col-md-12">Register to the Infinity bank</h1>
+<br/><br/><br/><br/>
+<div class="row">
+	<div class=" col-md-8 col-lg-8 col-md-offset-2 ">
+		<form [formGroup]="userSignUpForm" (submit)="formSubmit(userSignUpForm.value)">
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="userName" style="color:black">User Name</label> <input id="userName" type="text" placeholder="Enter the desired User Name" class="form-control"
+					 formControlName="userName" />
+					<div class="help-block">
+						<span *ngIf="userNameMessage !== NULL " style="color:red;">
+							{{userNameMessage}}</span>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Aadhar number</label> <input id="aadharNum" type="text" placeholder="Enter the Aadhar Number" class="form-control"
+					 formControlName="aadharNum" />
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('aadharNum').touched
+                         && userSignUpForm.get('aadharNum').errors" style="color:red;">
+							Please enter correct 16 letter aadhar number. </span>
+					</div>
+				</div>
+
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Email</label> <input id="email" type="text" placeholder="Email (required)" class="form-control" formControlName="email"
+					/>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('email').touched
+                         && userSignUpForm.get('email').errors" style="color:red;">
+							Please enter the correct email id. </span>
+					</div>
+				</div>
+
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">First name</label> <input id="fname" type="text" placeholder="First Name" class="form-control" formControlName="fname"
+					/>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('fname').touched
+                         && userSignUpForm.get('fname').errors" style="color:red;">
+							Please enter your first name, Its required </span>
+					</div>
+				</div>
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Gender</label> 
+					<select  d="gender"  class="form-control" formControlName="gender">
+						<option value="FEMALE">FEMALE</option>
+						<option value="MALE">MALE</option>
+					</select>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('gender').touched
+                         && userSignUpForm.get('gender').errors" style="color:red;">
+						Please enter the gender, Its required. </span>
+					</div>
+				</div>
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Last Name</label> <input id="lname" type="text" placeholder="Last Name" class="form-control" formControlName="lname"
+					/>
+					<div class="hgebelp-block">
+						<span *ngIf="userSignUpForm.get('lname').touched
+                         && userSignUpForm.get('lname').errors" style="color:red;">
+							Please enter your last name, Its required</span>
+					</div>
+				</div>
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Middle Name</label> <input id="mname" type="text" placeholder="Middle Name" class="form-control" formControlName="mname"
+					/>
+
+				</div>
+			</div>
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Pan Card Number</label> <input id="pancardNum" type="text" placeholder="Pan Card Number" class="form-control"
+					 formControlName="pancardNum" />
+				</div>
+				<div class="help-block">
+					<span *ngIf="userSignUpForm.get('pancardNum').touched
+                         && userSignUpForm.get('pancardNum').errors" style="color:red;">
+						Please enter pan card number, Its required</span>
+				</div>
+			</div>
+
+
+			<div class=" card-2" style="width: 100%;">
+				<div class="form-group" class="well" style="width: 100%; background-color:#A4CDD2">
+					<label for="">Phone Number</label> <input id="phone" type="text" placeholder="Phone" class="form-control" formControlName="phone"
+					/>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('phone').touched
+                         && userSignUpForm.get('phone').errors" style="color:red;">
+							Please enter the correct phone number of 10 digit. </span>
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+
+
+			<h3>Address:</h3>
+			<div formGroupName="address" class="card-2 well" style="width: 100%; background-color:#A4CDD2">
+
+				<div class=" hvr-grow" style="width: 100%;">
+					<div class="form-group">
+						<label for="">Country</label> <input id="country" type="text" placeholder="Country" class="form-control" formControlName="country"
+						/>
+					</div>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('address.country').touched
+                         && userSignUpForm.get('address.country').errors" style="color:red;">
+							Please enter your country, Its required</span>
+					</div>
+
+				</div>
+
+
+				<div class=" hvr-grow" style="width: 100%;" style="width: 100%; background-color:#A4CDD2">
+					<div class="form-group">
+						<label for="">Pincode</label> <input id="pincode" type="text" placeholder="Pincode" class="form-control" formControlName="pincode"
+						/>
+					</div>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('address.pincode').touched
+                         && userSignUpForm.get('address.pincode').errors" style="color:red;">
+							Please enter your pincode, Its required</span>
+					</div>
+
+
+				</div>
+
+
+				<div class=" hvr-grow" style="width: 100%;" style="width: 100%; background-color:#A4CDD2">
+					<div class="form-group">
+						<label for="">State</label> <input id="state" type="text" placeholder="State" class="form-control" formControlName="state"
+						/>
+					</div>
+					<div class="help-block">
+						<span *ngIf="userSignUpForm.get('address.state').touched
+                         && userSignUpForm.get('address.state').errors" style="color:red;">
+							Please enter your state, Its required</span>
+					</div>
+
+				</div>
+
+
+				<div class=" hvr-grow" style="width: 100%;"style="width: 100%; background-color:#A4CDD2">
+					<div class="form-group">
+						<label for="">Street</label> <input id="street" type="text" placeholder="Street" class="form-control" formControlName="street"
+						/>
+					</div>
+
+				</div>
+
+				<hr />
+			</div>
+
+			<div class="alert"><a>{{message}}</a></div>
+			<button class="btn btn-primary  btn-lg col-md-offset-6" style="background-color:#006064" type="submit" (click)="saveUser($event)">Save</button>
+		</form>
+
+		<br/><br/>
+	</div>
+</div>

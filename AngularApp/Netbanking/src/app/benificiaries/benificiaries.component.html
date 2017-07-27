@@ -1,0 +1,114 @@
+
+<div class="page-header" >
+  <h2> Manage Beneficiaries</h2>
+</div>
+<div class="col-md-offset-3 col-md-6">
+<div class="form-group">
+	<label>Select Account :</label>
+	<select class="form-control" #sel (change)='select(sel.value)'>
+		<option>Select Account</option>
+		<option *ngFor="let account of accounts" [value]=account.accountNum>{{account.accountNum}}</option>
+	</select>
+
+	<div *ngIf="!(selectedAccount==='')  && !(selectedAccount==='--')"
+		class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Account Number</th>
+					<th>Beneficiary Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let beneficiary of ben">
+					<td>{{beneficiary.accountNum}}</td>
+					<td>{{beneficiary.userName}}</td>
+					<td><button (click)="updateSelectedBeneficiary(beneficiary.accountNum)" data-toggle="modal" data-target="#myConfirmModal" type="button" class="btn btn-danger btn-sm">
+							<span class="glyphicon glyphicon-remove"></span> Remove
+						</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	
+	
+			<div class="modal fade" id="myConfirmModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Delete Beneficiary</h4>
+					</div>
+					<div class="modal-body">
+					<a>Are you sure you want to delete?</a>
+					</div>
+
+					<div class="modal-footer">
+
+						<button type="button" (click)="deleteBen()" data-dismiss="modal" class="btn btn-primary">Yes</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+	<div *ngIf="!(selectedAccount==='') && !(selectedAccount==='--') "
+		class="container">
+		<!-- Trigger the modal with a button -->
+		<button type="button" class="btn btn-primary" style="background-color:#006064" data-toggle="modal"
+			data-target="#myModal">Add Beneficiary</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Beneficiary Form</h4>
+					</div>
+					<div class="modal-body">
+						<form [formGroup]="beneficiaryform">
+
+							<div class="form-group">
+								<input type="text" readonly formControlName="fromAccount"
+									class="form-control input-underline input-lg" id=""
+									placeholder="Selected Account Number : {{selectedAccount}}">
+							</div>
+							<div class="form-group">
+								<input type="text" formControlName="userName"
+									class="form-control input-underline input-lg" id=""
+									placeholder="Beneficiary Name">
+							</div>
+							<div class="form-group">
+								<input type="text" formControlName="toAccount"
+									class="form-control input-underline input-lg" id=""
+									placeholder="Account Number">
+							</div>
+
+						</form>
+						<div *ngIf="!(errormessage==='') && errormessage!=='NONE' " class="alert alert-danger">{{errormessage}}</div>
+						<div *ngIf="(errormessage==='NONE') && !(errormessage==='')" class="alert alert-success">SUCCESS</div>
+					
+					</div>
+
+					<div class="modal-footer">
+
+						<button type="button" (click)="saveBen($event)"
+							class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+</div>

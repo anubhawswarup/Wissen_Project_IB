@@ -1,0 +1,21 @@
+<div class="row">
+  <div>
+    <ul>
+      <li><input type="text" [(ngModel)]="searchbox" placeholder="Enter the desired user"/></li>
+      <li class="card-5" style="width:200px" *ngFor="let u of users " 
+      (click)="updateSelectedUser(u)">
+
+        <a>{{u.userName}}</a>
+        <a>{{u.fname}}</a>
+        <a>{{u.email}}</a>
+        <a>{{u.phone}}</a>
+
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-3 col-md-offset-6">
+    <a>{{selecteduser}}</a>
+  </div>
+
+</div>

@@ -1,0 +1,34 @@
+<div class="pos-f-t fixed-top header">
+
+	<nav class="navbar navbar-default" role="navigation" style="background-color:#006064 ; padding:0;margin:0; color:white;">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+         <span class = "sr-only">Toggle navigation</span>
+         <span class = "icon-bar"></span>
+         <span class = "icon-bar"></span>
+         <span class = "icon-bar"></span>
+      </button>
+
+			<a class="navbar-brand" href="#" style="color:white;">Infinity Bank <span style="width:25px;length:25px" class="glyphicon glyphicon-piggy-bank"></span> </a>
+		</div>
+		<div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li> <a [routerLink]="['/aboutus']" [routerLinkActive]="['router-link-active']" style="color:white;">About Us</a></li>
+
+				<li> <a [routerLink]="['/contactus']" [routerLinkActive]="['router-link-active']" style="color:white;">Contact Us</a></li>
+
+				<li> <a [routerLink]="['/login']" [routerLinkActive]="['router-link-active']" style="color:white;">Log In</a></li>
+
+				<li> <a [routerLink]="['/register']" [routerLinkActive]="['router-link-active']" style="color:white;">Register</a></li>
+
+			</ul>
+		</div>
+
+
+	</nav>
+
+	<router-outlet></router-outlet>
+</div>

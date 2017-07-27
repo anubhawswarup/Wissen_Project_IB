@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 col-lg-7">
+      <h2>LIST OF ACCOUNTS</h2>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-11 col-lg-11 ">
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th> </th> -->
+             <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="accnumsearch" /></span></th>
+              <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="usernamesearch" /></span></th>
+              <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="typesearch" /></span></th>               
+              <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="datesearch" /></span></th>
+            </tr>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Account Number</th>
+              <th>User Name</th>
+              <th>Type</th>
+              <th>Opening Date</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="card-1" *ngFor="let a of accounts | accountsearchPipe:'accNum': accnumsearch | accountsearchPipe:'type': typesearch | accountsearchPipe:'openingDate': datesearch | usernamesearchPipe : usernamesearch" style="margin:1em;padding:1em;">
+              <!-- <td>{{i+1}}</td> -->
+              <td>{{a.accNum}}</td>
+              <td>{{a.user.userName}}</td>
+              <td>{{a.type}}</td>
+              <td>{{a.openingDate}}</td>
+              <td>{{a.balance}}</td>
+              
+            </tr>
+            <tr></tr>
+          </tbody>
+
+        </table>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+
+</div>
+
+
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">DELETE ACCOUNT CONFIRMATION </h4>
+      </div>
+      <div class="modal-body">
+        <strong> Are you sure to delete the Account:    <span style="font-size: xx-large;color: red; float:right">{{selacc?.accNum}}</span></strong>
+        <br><br>
+        <h2>Details:</h2>
+        <div class="list-group">
+          <a class="list-group-item">
+            <h4 class="list-group-item-heading">{{selacc?.user.userName}}</h4>
+            <small class="list-group-item-text">User Name</small>
+          </a>
+          <a class="list-group-item">
+            <h4 class="list-group-item-heading">{{selacc?.type}}</h4>
+            <small class="list-group-item-text">Account Type</small>
+          </a>
+          <a class="list-group-item">
+            <h4 class="list-group-item-heading">{{selacc?.balance}}</h4>
+            <small class="list-group-item-text">Current Balance</small>
+          </a>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger card-1" data-dismiss="modal" (click)="deleteAccount(selacc)">DELETE</button>
+        <button type="button" class="btn btn-default card-1" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div id="editModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">UPDATE ACCOUNT CONFIRMATION </h4>
+      </div>
+      <form class="form-horizontal" [formGroup]="accountUpdateForm" (submit)="updateAccount">
+        <fieldset>
+          <div class="modal-body">
+
+            <span style="font-size: xx-large;color: #86C5F1; float:right"><span style="font-size: small; color: black;">Account Number:</span>{{selacc?.accNum}}</span>
+            <br><br>
+
+
+
+            <!-- Form Name -->
+            <legend>Details</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Account Number</label>
+              <div class="col-md-4">
+                <input id="accountnumber"  type="text" value="{{selacc?.accNum}}" class="form-control input-md" formControlName="accNum">
+                <!-- <span class="help-block">help</span> -->
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Type</label>
+              <div class="col-md-4">
+                <input id="type" formControlName="type"  type="text" value="{{selacc?.type}}"  class="form-control input-md" >
+                <!-- <span class="help-block">help</span> -->
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">User Name</label>
+              <div class="col-md-4">
+                <input id="userName" formControlName="userName"  type="text" value="{{selacc?.user.userName}}"  class="form-control input-md" >
+                <!-- <span class="help-block">help</span> -->
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="balance">Balance</label>
+              <div class="col-md-4">
+                <input id="balance" formControlName="balance"  type="text" value="{{selacc?.balance}}"  class="form-control input-md" >
+                <!-- <span class="help-block">help</span> -->
+              </div>
+            </div>
+      
+            
+            <!-- Text input-->
+           
+          </div>
+          <div class="modal-footer">
+            
+            <button type="submit" class="btn btn-danger card-1" data-dismiss="modal" (click)="updateAccount()">UPDATE</button>
+            <button type="button" class="btn btn-default card-1" data-dismiss="modal">CLOSE</button>
+          </div>
+
+        </fieldset>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>

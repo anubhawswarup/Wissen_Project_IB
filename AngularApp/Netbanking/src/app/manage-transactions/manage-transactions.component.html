@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 col-lg-7">
+      <h2>LIST OF TRANSACTIONS</h2>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-11 col-lg-11 ">
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th> </th> -->
+             <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="idsearch" style="width:30px;" /></span></th>
+              <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="fromaccsearch" /></span></th>
+               <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="toaccsearch" /></span></th>
+              <th><span class="glyphicon glyphicon-search"><input type="text" [(ngModel)]="timesearch" /></span></th>
+               <th></th>              
+            </tr>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Transaction Id</th>
+              <th>Debit Account Number</th>
+              <th>Credit Account Number</th>
+              <th>Time of Transaction</th>
+              <th>Amount</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="card-1" *ngFor="let t of transfers | searchPipe:'timeStamp':timesearch |transactionsearch:'tranferId':idsearch |creditaccpipe:toaccsearch |debitaccpipe:fromaccsearch  "  style="margin:1em;padding:1em;">
+              <!-- <td>{{i+1}}</td> -->
+              <td>{{t.tranferId}}</td>
+              <td>{{t.fromAccount.accNum}}</td>
+              <td>{{t.toAccount.accNum}}</td>
+              <td>{{t.timeStamp}}</td>
+               <td>{{t.amount}}</td>
+              <td *ngIf="t.description">{{t.description}}</td>
+            </tr>
+            <tr></tr>
+          </tbody>
+
+        </table>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+
+</div>

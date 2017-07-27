@@ -1,0 +1,51 @@
+<div class="col-md-4 col-md-offset-1" style="padding:1em">
+  <div class="card-3" style="padding:1em;background-color:#006064;text-align: center;-moz-text-decoration-color: white;font-size:large;">
+
+    <a [routerLink]="['manageusers']" style="color:white"> <h2>Number of Users : {{userCount}} </h2></a>
+
+  </div>
+  <br/>
+  <div class="card-5" style="padding:1em">
+  <div style="display: block">
+    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+  <br/>
+  <br/>
+  <div class="card-2" style="padding:1em;background-color:#006064;text-align: center;-moz-text-decoration-color: white;font-size:large;">
+
+    <a style="color:white"> Number of accounts : {{accountsCount}}</a>
+  </div>
+  </div>
+</div>
+
+
+<div class="col-md-5 col-md-offset-1 ">
+
+
+  <div style="width:500px; length:500px;padding:1em" class="card-4">
+
+    <div>
+      <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions1" [legend]="barChartLegend1"
+        [chartType]="barChartType1" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+    <br>
+    <div class="card-2" style="padding:1em;background-color:#006064;text-align: center;-moz-text-decoration-color: white;font-size:large;">
+
+      <a style="color:white">Accounts by time</a>
+
+    </div>
+
+  </div>
+  <div>
+    <br/>
+    <br/>
+ <div class="card-3" style="padding:1em;background-color:#006064;text-align: center;-moz-text-decoration-color: white;font-size:large;">
+
+    <a [routerLink]="['pendingrequests']" style="color:white"> <h2>Number of pending approvals : {{approvalsCount}} </h2></a>
+
+  </div>
+
+  </div>
+</div>

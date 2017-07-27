@@ -1,0 +1,35 @@
+
+<div style="margin-top:20px;">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+        <h1 class="col-md-offset-2 col-md-10">Welcome to the Infinity bank</h1>
+          
+            <br/><br/><br/><br/>
+            <form [formGroup]="loginform">
+                
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" formControlName="userName" class="form-control input-underline input-lg" id="" placeholder="Username">
+                    </div>
+                  	<div class="form-group">
+                        <input type="password" formControlName="password" class="form-control input-underline input-lg" id="" placeholder="password">
+                    </div>
+                </div>
+                <button class="btn rounded-btn btn-primary" style="background-color:#006064" (click)="onLoggedin($event)"> Log in </button>
+                &nbsp;
+                <br/>
+                <br/>
+                <div class="col-md-offset-3 col-md-6">
+                <span class="badge" >{{message}}</span>
+                 <br/>
+                  <br/>
+                <a>Not a User? <button [routerLink]="['/register']" class="btn rounded-btn btn-primary" style="background-color:#006064">Register</button>
+                </a>
+                
+                 
+                <br/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

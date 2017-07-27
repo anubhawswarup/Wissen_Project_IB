@@ -1,0 +1,137 @@
+<div class="page-header">
+  <h2>My Profile</h2>
+</div>
+<div class="col-md-offset-2 col-md-6 card-5" style="text-align:left; padding:2em;">
+  <h3 style="text-align: center">{{user?.fname|uppercase}} {{user?.mname|uppercase}} {{user?.lname|uppercase}} </h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:left;">
+      <strong>User Name:</strong><br/>
+      <strong>First Name:</strong><br/>
+      <strong>Last Name:</strong><br/>
+      <strong>PAN Number:</strong><br/>
+      <strong>Aadhaar Number:</strong><br/>
+      <strong>Mobile Number:</strong><br/>
+      <strong>Email-ID:</strong><br/>
+      <strong>Address:</strong>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      {{user?.userName}}<br/> {{user?.fname}}
+      <br/> {{user?.lname}}
+      <br/> {{user?.pancardNum}}
+      <br/> {{user?.aadharNum}}
+      <br/> {{user?.phone}}
+      <br/> {{user?.email}}
+      <br/> {{user?.address.street|lowercase}} street, {{user?.address.state|lowercase}}-{{user?.address.pincode|lowercase}}
+    </div>
+  </div>
+  <br/><br/>
+  <button type="button" class="btn btn-primary" style="border-radius:0;" data-toggle="modal" data-target="#myModal">Change User Details</button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-danger" style="border-radius:0;" data-toggle="modal" data-target="#passwordModal">Change Password</button>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">UPDATE USER CONFIRMATION </h4>
+      </div>
+      <form  [formGroup]="userUpdateForm" (submit)="updateUser">
+        <fieldset>
+          <div class="modal-body">
+
+
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="textinput">Email</label>
+              <div>
+                <input id="email"  type="text" value="{{seluser?.email}}" class="form-control input-md" formControlName="email">
+                <!-- <span class="help-block">help</span> -->
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="textinput">Phone</label>
+              
+                <input id="phone" formControlName="phone"  type="text" value="{{seluser?.phone}}"  class="form-control input-md" >
+                <!-- <span class="help-block">help</span> -->
+            </div>
+            
+            <!-- Text input-->
+             <div class="form-group">
+              <label class=" control-label" for="textinput">Address</label>
+              <div><br>
+                <label for="street">Street</label>
+                <input id="street" type="text" value="{{seluser?.address.street}}" class="form-control input-md" formControlName="street">
+                <label for="pincode">Pincode</label>
+                <input id="pincode" type="text" value="{{seluser?.address.pincode}}" class="form-control input-md" formControlName="pincode">
+                <label for="state">State</label>
+                <input id="state" type="text" value="{{seluser?.address.state}}" class="form-control input-md" formControlName="state">
+                <label for="country">Country</label>
+                <input id="country" type="text" value="{{seluser?.address.country}}" class="form-control input-md" formControlName="country">
+              </div>
+             </div>
+
+          </div>
+          <div class="modal-footer">
+            
+            <button type="submit" class="btn btn-danger card-1" data-dismiss="modal" (click)="updateUser()">UPDATE</button>
+            <button type="button" class="btn btn-default card-1" data-dismiss="modal">CLOSE</button>
+          </div>
+
+        </fieldset>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="passwordModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change Password</h4>
+      </div>
+      <form [formGroup]="passwordGroup" (submit)="savePassword($event)">
+        <div class="modal-body">
+          <div class="form-group" [class.has-error]="passwordGroup.get('oldPassword').errors  && passwordGroup.get('oldPassword').touched">
+            <label>Enter Old password</label>
+            <input type="password" class="form-control" formControlName="oldPassword" />
+            <span style="color:red" *ngIf="passwordGroup.get('oldPassword').errors && passwordGroup.get('oldPassword').touched">Field is required</span>
+          </div>
+          <div formGroupName="cpasswordGroup">
+            <div class="form-group" [class.has-error]="passwordGroup.get('cpasswordGroup.newPassword').errors  && passwordGroup.get('cpasswordGroup.newPassword').touched">
+              <label>Enter New Password</label>
+              <input type="password" class="form-control" formControlName="newPassword" />
+              <span style="color:red" *ngIf="passwordGroup.get('cpasswordGroup.newPassword').errors?.required && passwordGroup.get('cpasswordGroup.newPassword').touched">Field is required</span>
+            </div>
+            <div class="form-group" [class.has-error]="passwordGroup.get('cpasswordGroup.cnewPassword').errors  && passwordGroup.get('cpasswordGroup.cnewPassword').touched">
+              <label>Confirm New Password</label>
+              <input type="password" class="form-control" formControlName="cnewPassword" />
+              <span style="color:red" *ngIf="passwordGroup.get('cpasswordGroup.cnewPassword').errors?.required && passwordGroup.get('cpasswordGroup.cnewPassword').touched">Field is required</span>
+            </div>
+            </div>
+
+             <span style="color:red" *ngIf="passwordGroup.get('cpasswordGroup').errors?.match && passwordGroup.get('cpasswordGroup.cnewPassword').touched && passwordGroup.get('cpasswordGroup.newPassword').touched">password doesnt match</span>
+         <div class="alert alert-danger" *ngIf="res?.status==='FAILED'">{{res.status}}- {{res.error}}</div>
+         <div class="alert alert-success" *ngIf="res?.status==='SUCCESS'">{{res.status}}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default">save</button> 
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

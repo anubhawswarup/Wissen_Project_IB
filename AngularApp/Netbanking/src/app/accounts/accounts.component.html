@@ -1,0 +1,110 @@
+<div class="page-header">
+	<h2> Manage Accounts</h2>
+</div>
+<div >
+	<div>
+		<table class="table table-striped" style="padding:1em">
+			<thead>
+				<tr>
+					<th>Account Number</th>
+					<th>Account Type</th>
+					<th>Balance</th>
+					<th>Open Date</th>
+					<th>
+						<th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr *ngFor="let account of accounts">
+					<td>{{account.accountNum}}</td>
+					<td>{{account.type}}</td>
+					<td>{{account.balance}}</td>
+					<td>{{account.openingDate}}</td>
+					<td><button (click)="onAccountSelected(account.accountNum)" class="btn btn-success btn-sm" style="background-color:#006064">
+						<span class="glyphicon"></span>Transactions
+					</button></td>
+					<td><button (click)="onDownload(account.accountNum)" class="btn btn-success btn-sm" style="background-color:#006064">
+						<span class="glyphicon"></span> Download transactions
+					</button></td>
+
+				</tr>
+				<tr>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+	<button class="btn btn-primary" data-toggle="modal" data-target="#newAccount" type="button" class="btn btn-primary btn-sm"
+	 style="background-color:#006064 ;display: block; margin: 0 auto;">Add Account</button>
+	<br />
+	<div *ngIf="isAccountSelected" class="table-responsive .info container">
+		<table class="table table-striped table-responsive" style="padding:1em;">
+			<thead>
+				<tr>
+					<th>Transaction Id</th>
+					<th>From Account</th>
+					<th>To Account</th>
+					<th>Time stamp</th>
+					<th>Amount</th>
+					<th>Description</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let transaction of transactions" [class.success]="!(transaction.fromAccount.accNum===this.selectedAccount)" [class.danger]="transaction.fromAccount.accNum===this.selectedAccount">
+					<td>{{transaction.tranferId}}</td>
+					<td>{{transaction.fromAccount.accNum}}</td>
+					<td>{{transaction.toAccount.accNum}}</td>
+					<td>{{transaction.timeStamp}}</td>
+					<td>{{transaction.amount}}</td>
+					<td>{{transaction.description}}</td>
+					<td *ngIf="transaction.fromAccount.accNum===this.selectedAccount">Debited</td>
+					<td *ngIf="!(transaction.fromAccount.accNum===this.selectedAccount)">Credited</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<br />
+	<div class="modal fade" id="newAccount" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create Account</h4>
+				</div>
+				<div class="modal-body">
+					<a>Choose account type: </a>
+					<form [formGroup]="accountform">
+
+						<div class="form-group">
+							<select formControlName="accountType">
+							<option value="SAVING">SAVINGS</option>
+							<option value="CURRENT">CURRENT</option>
+						</select>
+						</div>
+					</form>
+
+				</div>
+
+				<div class="modal-footer">
+
+					<button type="button" (click)="saveAccount()" data-dismiss="modal" class="btn btn-primary">Yes</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</div>
